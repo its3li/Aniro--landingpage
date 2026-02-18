@@ -168,10 +168,8 @@
                         <img src="https://cdn.freebiesupply.com/logos/large/2x/android-logo-black-and-white.png" alt="Android" class="w-5 h-5 object-contain opacity-90">
                     </a>
 
-                    <!-- زر القائمة للجوال (Hamburger) -->
-                    <button id="mobile-menu-btn" class="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors z-50">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
-                    </button>
+    
+                
                 </div>
             </div>
         </div>
@@ -240,73 +238,68 @@
         </div>
     </section>
 
-    <!-- المميزات (Grid Section) -->
-    <section id="features" class="py-16 md:py-24 relative">
+     <section id="features" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
-                    لماذا تختار <span class="text-gold-400">أنيروا</span>؟
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-6">
+                    كل ما تحتاجه <span class="text-gold-400">في تطبيق واحد</span>
                 </h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">
-                    صُمم التطبيق بعناية ليغطي احتياجات المسلم اليومية بأسلوب يجمع بين التكنولوجيا والروحانية.
-                </p>
+                <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full"></div>
             </div>
 
-            <!-- Grid Layout -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-6 gap-6">
-                <!-- Feature 1 -->
-                <div class="glass-card p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group lg:col-span-2">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center text-gold-400 mb-6 group-hover:text-gold-300 group-hover:scale-110 transition-all">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Card 1 -->
+                <div data-aos="fade-up" data-aos-delay="0" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
                         <i data-lucide="clock" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">دقة المواقيت</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        حساب دقيق لأوقات الصلاة بناءً على موقعك الجغرافي، مع تنبيهات أذان بأصوات عذبة تأسر القلوب وتذكرك بالوقوف بين يدي الله.
-                    </p>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">مواقيت الصلاة</h3>
+                    <p class="text-slate-400 leading-relaxed">حساب دقيق لأوقات الصلاة بناءً على موقعك، مع إمكانية تخصيص طريقة الحساب والمذهب.</p>
                 </div>
 
-                <!-- Feature 2 -->
-                <div class="glass-card p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group lg:col-span-2">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center text-gold-400 mb-6 group-hover:text-gold-300 group-hover:scale-110 transition-all">
-                        <i data-lucide="book-open-check" class="w-7 h-7"></i>
+                <!-- Card 2 -->
+                <div data-aos="fade-up" data-aos-delay="100" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
+                        <i data-lucide="book-open" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">المصحف الشامل</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        تجربة قراءة ليلية مريحة للعين (Dark Mode)، مع تفسير ميسر، تلاوات لأشهر القراء، وخط واضح يحاكي مصحف المدينة.
-                    </p>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">المصحف الشريف</h3>
+                    <p class="text-slate-400 leading-relaxed">قراءة مريحة مع الوضع الليلي، تفاسير، وترجمات، وخط واضح يحاكي مصحف المدينة.</p>
                 </div>
 
-                <!-- Feature 3 -->
-                <div class="glass-card p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group lg:col-span-2">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center text-gold-400 mb-6 group-hover:text-gold-300 group-hover:scale-110 transition-all">
+                <!-- Card 3 -->
+                <div data-aos="fade-up" data-aos-delay="200" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
+                        <i data-lucide="moon" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">أذكار وحصن المسلم</h3>
+                    <p class="text-slate-400 leading-relaxed">مكتبة شاملة من الأذكار والأدعية الصحيحة، مع مسبحة إلكترونية ذكية لتسهيل المتابعة.</p>
+                </div>
+
+                <!-- Card 4 (Qibla - Newly Added) -->
+                <div data-aos="fade-up" data-aos-delay="300" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
+                        <i data-lucide="compass" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">القبلة</h3>
+                    <p class="text-slate-400 leading-relaxed">حدد اتجاه القبلة بدقة أينما كنت، باستخدام مستشعرات الهاتف وبدون الحاجة للإنترنت.</p>
+                </div>
+
+                <!-- Card 5 (Widget) -->
+                <div data-aos="fade-up" data-aos-delay="400" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
                         <i data-lucide="layout-grid" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">ويدجت ذكية</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        تابع الوقت المتبقي للصلاة أو وردك القرآني مباشرة من شاشة القفل أو الرئيسية، بتصاميم عصرية تناسب أناقة هاتفك.
-                    </p>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3">ويدجت (Widget)</h3>
+                    <p class="text-slate-400 leading-relaxed">تابع أوقات الصلاة مباشرة من شاشة هاتفك الرئيسية، بتصاميم عصرية تناسب ذوقك.</p>
                 </div>
 
-                <!-- Feature 4 -->
-                <div class="glass-card p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group lg:col-span-3">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center text-gold-400 mb-6 group-hover:text-gold-300 group-hover:scale-110 transition-all">
-                        <i data-lucide="heart-handshake" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">حصن المسلم</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        أذكار الصباح والمساء وأدعية مختارة بعناية، مع واجهة سهلة التنقل وعداد تسبيح ذكي يساعدك على المداومة.
-                    </p>
-                </div>
-
-                <!-- Feature 5 -->
-                <div class="glass-card p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group md:col-span-2 lg:col-span-3">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center text-gold-400 mb-6 group-hover:text-gold-300 group-hover:scale-110 transition-all">
+                <!-- Card 6 (Privacy) -->
+                <div data-aos="fade-up" data-aos-delay="500" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
                         <i data-lucide="shield-check" class="w-7 h-7"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-white mb-3">خصوصية تامة</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        تطبيق خالي من الإعلانات المزعجة، يعمل بدون إنترنت، ويحترم خصوصية بياناتك وموقعك الجغرافي.
-                    </p>
+                    <p class="text-slate-400 leading-relaxed">بياناتك ملكك وحدك. لا تتبع، لا إعلانات، ولا نطلب إلا الأذونات الضرورية للعمل.</p>
                 </div>
             </div>
         </div>

@@ -34,28 +34,44 @@
                     },
                     colors: {
                         midnight: {
-                            900: '#020617', // كحلي غامق جداً للخلفية
-                            800: '#0f172a',
-                            700: '#1e293b',
+                            950: '#010410',
+                            900: '#020617',
+                            800: '#0a1128',
+                            700: '#141d35',
+                            600: '#1e293b',
                         },
                         gold: {
-                            300: '#FDE047',
-                            400: '#FACC15',
-                            500: '#EAB308', // اللون الذهبي الأساسي
-                            600: '#CA8A04',
-                            glow: 'rgba(234, 179, 8, 0.5)',
+                            200: '#FEF3C7',
+                            300: '#FDE68A',
+                            400: '#F5D060',
+                            500: '#D4A836',
+                            600: '#B8860B',
+                            glow: 'rgba(212, 168, 54, 0.4)',
                         }
                     },
-                    backgroundImage: {
-                        'aurora': 'radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0) 0%, rgba(2, 6, 23, 1) 100%)',
-                    },
                     animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
+                        'glow-pulse': 'glowPulse 4s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        shimmer: {
+                            '0%, 100%': { opacity: '0.5' },
+                            '50%': { opacity: '1' },
+                        },
+                        glowPulse: {
+                            '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+                            '50%': { opacity: '0.6', transform: 'scale(1.05)' },
                         }
                     }
                 }
@@ -64,54 +80,53 @@
     </script>
 
     <style>
-        /* أنماط Glassmorphism */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(20, 29, 53, 0.6) 0%, rgba(10, 17, 40, 0.4) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 168, 54, 0.06);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
         }
-        
+
+        .glass-card:hover {
+            border-color: rgba(212, 168, 54, 0.15);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(212, 168, 54, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
         .glass-nav {
-            background: rgba(2, 6, 23, 0.7);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(1, 4, 16, 0.8);
+            backdrop-filter: blur(32px) saturate(1.5);
+            -webkit-backdrop-filter: blur(32px) saturate(1.5);
+            border-bottom: 1px solid rgba(212, 168, 54, 0.08);
         }
 
-        /* تأثيرات الخلفية Aurora */
-        .blob {
-            position: absolute;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.4;
-            border-radius: 50%;
-        }
-
-        /* تخصيص شريط التمرير */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #020617;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
-        
-        /* تأثيرات النصوص الذهبية */
         .text-gold-gradient {
-            background: linear-gradient(to bottom, #FDE047, #EAB308);
+            background: linear-gradient(135deg, #FDE68A 0%, #D4A836 50%, #B8860B 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* أنماط التبديل (Swap) */
+        .bg-radial-glow {
+            background: radial-gradient(ellipse at center, rgba(212, 168, 54, 0.08) 0%, transparent 70%);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #010410; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+        /* Phone swap */
         .phone-front {
             z-index: 30;
             transform: scale(1) translateX(0) translateY(0);
@@ -121,280 +136,523 @@
 
         .phone-back {
             z-index: 10;
-            transform: scale(0.9) translateX(40%) translateY(5%);
-            opacity: 0.7;
-            filter: blur(1px) brightness(0.7);
+            transform: scale(0.88) translateX(35%) translateY(4%);
+            opacity: 0.5;
+            filter: blur(2px) brightness(0.6);
             cursor: pointer;
         }
-        
-        /* للجوال، التعديل على الإزاحة */
+
         @media (max-width: 768px) {
             .phone-back {
-                transform: scale(0.9) translateX(25%) translateY(5%);
+                transform: scale(0.88) translateX(22%) translateY(4%);
             }
+        }
+
+        /* Geometric Islamic pattern overlay */
+        .pattern-overlay {
+            background-image: 
+                linear-gradient(30deg, rgba(212, 168, 54, 0.015) 12%, transparent 12.5%, transparent 87%, rgba(212, 168, 54, 0.015) 87.5%, rgba(212, 168, 54, 0.015)),
+                linear-gradient(150deg, rgba(212, 168, 54, 0.015) 12%, transparent 12.5%, transparent 87%, rgba(212, 168, 54, 0.015) 87.5%, rgba(212, 168, 54, 0.015)),
+                linear-gradient(30deg, rgba(212, 168, 54, 0.015) 12%, transparent 12.5%, transparent 87%, rgba(212, 168, 54, 0.015) 87.5%, rgba(212, 168, 54, 0.015)),
+                linear-gradient(150deg, rgba(212, 168, 54, 0.015) 12%, transparent 12.5%, transparent 87%, rgba(212, 168, 54, 0.015) 87.5%, rgba(212, 168, 54, 0.015)),
+                linear-gradient(60deg, rgba(212, 168, 54, 0.02) 25%, transparent 25.5%, transparent 75%, rgba(212, 168, 54, 0.02) 75%, rgba(212, 168, 54, 0.02)),
+                linear-gradient(60deg, rgba(212, 168, 54, 0.02) 25%, transparent 25.5%, transparent 75%, rgba(212, 168, 54, 0.02) 75%, rgba(212, 168, 54, 0.02));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+        }
+
+        /* Animated divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 168, 54, 0.3), transparent);
+        }
+
+        /* Feature card number */
+        .feature-number {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(212, 168, 54, 0.1);
+            color: #D4A836;
+            border: 1px solid rgba(212, 168, 54, 0.2);
+        }
+
+        /* Star decorations */
+        .star-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(212, 168, 54, 0.4);
+            position: absolute;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        /* Phone mockup premium frame */
+        .phone-frame {
+            position: relative;
+            border-radius: 2.8rem;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.08),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(212, 168, 54, 0.2), transparent, rgba(212, 168, 54, 0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Ko-fi button */
+        .kofi-btn {
+            background: linear-gradient(135deg, #D4A836, #B8860B);
+            color: #010410;
+            transition: all 0.3s ease;
+        }
+        .kofi-btn:hover {
+            box-shadow: 0 0 30px rgba(212, 168, 54, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Nav link hover effect */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 1px;
+            background: #D4A836;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Stat counter */
+        .stat-item {
+            position: relative;
+        }
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: rgba(212, 168, 54, 0.15);
+        }
+        .stat-item:last-child::after {
+            display: none;
+        }
+
+        /* Privacy modal transition */
+        .modal-enter {
+            animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
     </style>
 </head>
-<body class="bg-midnight-900 text-slate-200 font-sans antialiased overflow-x-hidden selection:bg-gold-500 selection:text-white">
+<body class="bg-midnight-950 text-slate-300 font-sans antialiased overflow-x-hidden selection:bg-gold-500/30 selection:text-gold-200">
 
+    <!-- Background layers -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="blob bg-indigo-900 w-96 h-96 top-0 right-0 translate-x-1/2 -translate-y-1/2"></div>
-        <div class="blob bg-teal-900 w-[500px] h-[500px] bottom-0 left-0 -translate-x-1/3 translate-y-1/3"></div>
-        <div class="blob bg-purple-900/30 w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20"></div>
+        <!-- Subtle radial glows -->
+        <div class="absolute w-[800px] h-[800px] -top-[200px] -right-[200px] rounded-full bg-gold-500/[0.03] blur-[120px]"></div>
+        <div class="absolute w-[600px] h-[600px] top-[40%] -left-[200px] rounded-full bg-midnight-600/50 blur-[100px]"></div>
+        <div class="absolute w-[500px] h-[500px] bottom-[10%] right-[20%] rounded-full bg-gold-500/[0.02] blur-[100px]"></div>
+        <!-- Pattern overlay -->
+        <div class="absolute inset-0 pattern-overlay opacity-40"></div>
     </div>
 
-    <nav class="fixed w-full z-50 transition-all duration-300 glass-nav">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-24">
+    <!-- ===== NAV ===== -->
+    <nav class="fixed w-full z-50 transition-all duration-500 glass-nav">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
                 <a href="#" class="flex items-center gap-3 z-50 group">
-                    <img src="https://i.ibb.co/3m1cD2NJ/Adobe-Express-file.png" alt="شعار أنيروا" class="h-14 md:h-20 w-auto object-contain rounded-xl transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.3)]">
+                    <img src="https://i.ibb.co/3m1cD2NJ/Adobe-Express-file.png" alt="شعار أنيروا" class="h-12 md:h-14 w-auto object-contain rounded-xl transition-all duration-500 group-hover:drop-shadow-[0_0_12px_rgba(212,168,54,0.25)]">
                 </a>
                 
-                <div class="hidden md:flex gap-8 text-slate-300 font-medium text-sm">
-                    <a href="#features" class="hover:text-gold-400 transition-colors py-2 border-b-2 border-transparent hover:border-gold-400/50">المميزات</a>
-                    <a href="#showcase" class="hover:text-gold-400 transition-colors py-2 border-b-2 border-transparent hover:border-gold-400/50">جولة في التطبيق</a>
-                    <a href="#donate" class="hover:text-gold-400 transition-colors py-2 border-b-2 border-transparent hover:border-gold-400/50">الدعم</a>
+                <div class="hidden md:flex gap-10 text-slate-400 font-medium text-sm tracking-wide">
+                    <a href="#features" class="nav-link hover:text-gold-400 transition-colors py-2">المميزات</a>
+                    <a href="#showcase" class="nav-link hover:text-gold-400 transition-colors py-2">جولة في التطبيق</a>
+                    <a href="#donate" class="nav-link hover:text-gold-400 transition-colors py-2">الدعم</a>
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="https://github.com/its3li/Aniro--landingpage/releases/download/v2.0/aniro-2.0.apk" class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] flex items-center gap-2 border border-gold-300/20 text-xs md:text-sm">
+                    <a href="https://github.com/its3li/Aniro--landingpage/releases/download/v2.0/aniro-2.0.apk" class="bg-gold-500 text-midnight-950 px-5 md:px-6 py-2.5 rounded-full font-bold transition-all duration-300 hover:bg-gold-400 hover:shadow-[0_0_24px_rgba(212,168,54,0.3)] flex items-center gap-2 text-xs md:text-sm">
                         <span>تحميل</span>
                         <span class="hidden md:inline">APK</span>
-                        <img src="https://cdn.freebiesupply.com/logos/large/2x/android-logo-black-and-white.png" alt="Android" class="w-5 h-5 object-contain opacity-90">
+                        <i data-lucide="download" class="w-4 h-4"></i>
                     </a>
 
-                    <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2">
-                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    <button id="mobile-menu-btn" class="md:hidden text-slate-400 hover:text-white focus:outline-none p-2" aria-label="فتح القائمة">
+                        <i data-lucide="menu" class="w-7 h-7"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div id="mobile-menu" class="fixed inset-0 z-40 bg-midnight-900/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 md:hidden flex flex-col items-center justify-center space-y-8">
-            <button id="close-menu-btn" class="absolute top-8 left-8 text-white/50 hover:text-white">
-                <i data-lucide="x" class="w-8 h-8"></i>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 z-40 bg-midnight-950/98 backdrop-blur-2xl transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden flex flex-col items-center justify-center gap-10">
+            <button id="close-menu-btn" class="absolute top-7 left-7 text-slate-500 hover:text-white transition-colors" aria-label="إغلاق القائمة">
+                <i data-lucide="x" class="w-7 h-7"></i>
             </button>
             
             <a href="#features" class="mobile-link text-2xl font-serif font-bold text-white hover:text-gold-400 transition-colors">المميزات</a>
             <a href="#showcase" class="mobile-link text-2xl font-serif font-bold text-white hover:text-gold-400 transition-colors">جولة في التطبيق</a>
             <a href="#donate" class="mobile-link text-2xl font-serif font-bold text-white hover:text-gold-400 transition-colors">التبرع ودعم التطبيق</a>
             
-            <div class="pt-8 border-t border-white/10 w-40 mx-auto"></div>
+            <div class="w-16 h-px bg-gold-500/20"></div>
             
-            <button onclick="document.getElementById('privacy-modal').classList.remove('hidden'); toggleMenu()" class="text-slate-400 hover:text-white">سياسة الخصوصية</button>
+            <button onclick="document.getElementById('privacy-modal').classList.remove('hidden'); toggleMenu()" class="text-slate-500 hover:text-gold-400 transition-colors text-sm">سياسة الخصوصية</button>
         </div>
     </nav>
 
-    <section class="relative pt-32 pb-16 lg:pt-52 lg:pb-32 overflow-hidden text-center">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+    <!-- ===== HERO ===== -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 pb-8 overflow-hidden">
+        <!-- Hero glow -->
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold-500/[0.04] blur-[120px] rounded-full animate-glow-pulse pointer-events-none"></div>
+
+        <div class="relative max-w-5xl mx-auto px-6 lg:px-8 flex flex-col items-center text-center">
             
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border-gold-500/30 text-gold-300 text-sm font-medium mb-8 animate-fade-in-up">
+            <!-- Version badge -->
+            <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full glass-card text-gold-400 text-xs font-medium tracking-wider mb-10 animate-fade-in-up uppercase">
                 <span class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse"></span>
                 الإصدار الجديد متاح الآن
             </div>
             
-            <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
-                <h1 class="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight mb-6 text-white drop-shadow-2xl px-2">
-                    أنيروا.. رفيقك لأداء <br>
-                    <span class="text-gold-gradient relative inline-block pb-2">
-                        العبادات
-                        <svg class="absolute w-full h-3 -bottom-1 right-0 text-gold-500 opacity-60" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99997C25.7509 9.36481 124.98 16.2393 198.5 2.5" stroke="currentColor" stroke-width="3"/></svg>
-                    </span>
+            <!-- Heading -->
+            <div class="animate-fade-in-up" style="animation-delay: 0.15s; opacity: 0;">
+                <h1 class="font-serif text-5xl sm:text-6xl lg:text-8xl font-bold leading-[1.15] mb-8 text-white">
+                    أنيروا.. رفيقك
+                    <br>
+                    <span class="text-gold-gradient">لأداء العبادات</span>
                 </h1>
             </div>
             
-            <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed px-4 animate-fade-in-up" style="animation-delay: 0.4s;">
-                تصميم يجمع بين الأصالة والحداثة، ليمنحك تجربة روحانية فريدة. من دقة المواقيت إلى خشوع التلاوة، صُمم "أنيروا" ليكون دليلك اليومي نحو السكينة.
+            <!-- Description -->
+            <p class="text-base sm:text-lg text-slate-400 max-w-xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style="animation-delay: 0.3s; opacity: 0;">
+                تصميم يجمع بين الأصالة والحداثة، ليمنحك تجربة روحانية فريدة. من دقة المواقيت إلى خشوع التلاوة، صُمم ليكون دليلك اليومي نحو السكينة.
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-5 justify-center w-full max-w-md mx-auto mb-16 px-4 animate-fade-in-up" style="animation-delay: 0.6s;">
-                <a href="https://github.com/its3li/Aniro--landingpage/releases/download/v2.0/aniro-2.0.apk" class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 hover:brightness-110 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] flex items-center justify-center gap-3 w-full sm:w-auto">
-                    <img src="https://cdn.freebiesupply.com/logos/large/2x/android-logo-black-and-white.png" alt="Android" class="w-6 h-6 object-contain opacity-90">
-                    تحميل التطبيق مباشرة (APK)
+            <!-- CTA -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-lg mx-auto mb-16 animate-fade-in-up" style="animation-delay: 0.45s; opacity: 0;">
+                <a href="https://github.com/its3li/Aniro--landingpage/releases/download/v2.0/aniro-2.0.apk" class="bg-gold-500 text-midnight-950 hover:bg-gold-400 px-8 py-4 rounded-2xl font-bold text-base transition-all duration-300 shadow-[0_0_30px_rgba(212,168,54,0.2)] hover:shadow-[0_0_40px_rgba(212,168,54,0.35)] flex items-center justify-center gap-3 w-full sm:w-auto">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    تحميل التطبيق مباشرة
                 </a>
             </div>
 
-            <div class="relative w-full max-w-4xl mx-auto mt-8 perspective-1000 px-4 animate-fade-in-up" style="animation-delay: 0.8s;">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-gold-500/20 blur-[100px] rounded-full -z-10"></div>
-                <div class="relative z-10 mx-auto w-full max-w-[300px] bg-midnight-900 rounded-[3rem] border-4 border-slate-700 shadow-2xl overflow-hidden ring-1 ring-white/10">
-                    <img src="https://i.ibb.co/WpPYzMfy/Screenshot-20260131-164859.jpg" alt="واجهة التطبيق الرئيسية" class="w-full h-auto">
+            <!-- Phone mockup -->
+            <div class="relative w-full max-w-sm mx-auto animate-fade-in-up" style="animation-delay: 0.6s; opacity: 0;">
+                <!-- Glow behind phone -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-gold-500/10 blur-[80px] rounded-full -z-10 animate-glow-pulse"></div>
+                
+                <div class="relative z-10 mx-auto w-full max-w-[280px] phone-frame animate-float">
+                    <div class="bg-midnight-900 rounded-[2.8rem] border-2 border-slate-700/50 overflow-hidden">
+                        <img src="https://i.ibb.co/WpPYzMfy/Screenshot-20260131-164859.jpg" alt="واجهة التطبيق الرئيسية" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="mt-12 flex flex-col items-center gap-2 text-slate-600 text-xs tracking-widest uppercase animate-fade-in-up" style="animation-delay: 0.8s; opacity: 0;">
+                <span>استكشف</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 animate-bounce"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ===== STATS BAR ===== -->
+    <section class="py-16 relative" data-aos="fade-up">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="stat-item">
+                    <div class="text-2xl md:text-3xl font-bold text-gold-gradient font-serif mb-1">114</div>
+                    <div class="text-xs text-slate-500 tracking-wide">سورة قرآنية</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-2xl md:text-3xl font-bold text-gold-gradient font-serif mb-1">5</div>
+                    <div class="text-xs text-slate-500 tracking-wide">صلوات يومية</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-2xl md:text-3xl font-bold text-gold-gradient font-serif mb-1">+200</div>
+                    <div class="text-xs text-slate-500 tracking-wide">ذكر ودعاء</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-2xl md:text-3xl font-bold text-gold-gradient font-serif mb-1">0</div>
+                    <div class="text-xs text-slate-500 tracking-wide">إعلانات</div>
                 </div>
             </div>
         </div>
     </section>
 
-     <section id="features" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ===== FEATURES ===== -->
+    <section id="features" class="py-24 lg:py-32 relative">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8">
+            <!-- Section header -->
             <div class="text-center mb-20" data-aos="fade-up">
-                <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-6">
-                    كل ما تحتاجه <span class="text-gold-400">في تطبيق واحد</span>
+                <p class="text-gold-500 text-xs tracking-[0.25em] uppercase font-medium mb-4">المميزات</p>
+                <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    كل ما تحتاجه
+                    <br>
+                    <span class="text-gold-gradient">في تطبيق واحد</span>
                 </h2>
-                <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full"></div>
+                <p class="text-slate-500 max-w-lg mx-auto leading-relaxed">
+                    صُمم بعناية ليكون رفيقك الروحاني اليومي، بتصميم عصري وتجربة سلسة.
+                </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                <div data-aos="fade-up" data-aos-delay="0" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
-                        <i data-lucide="clock" class="w-7 h-7"></i>
+            <!-- Feature grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                <!-- Feature 1 -->
+                <div data-aos="fade-up" data-aos-delay="0" class="glass-card p-8 rounded-2xl group transition-all duration-500 relative">
+                    <div class="feature-number">01</div>
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center text-gold-400 mb-6 group-hover:bg-gold-500/15 transition-all duration-300">
+                        <i data-lucide="clock" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">مواقيت الصلاة</h3>
-                    <p class="text-slate-400 leading-relaxed">حساب دقيق لأوقات الصلاة بناءً على موقعك، مع إمكانية تخصيص طريقة الحساب والمذهب.</p>
+                    <h3 class="font-serif text-lg font-bold text-white mb-3">مواقيت الصلاة</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">حساب دقيق لأوقات الصلاة بناءً على موقعك، مع إمكانية تخصيص طريقة الحساب والمذهب.</p>
                 </div>
 
-                <div data-aos="fade-up" data-aos-delay="100" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
-                        <i data-lucide="book-open" class="w-7 h-7"></i>
+                <!-- Feature 2 -->
+                <div data-aos="fade-up" data-aos-delay="80" class="glass-card p-8 rounded-2xl group transition-all duration-500 relative">
+                    <div class="feature-number">02</div>
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center text-gold-400 mb-6 group-hover:bg-gold-500/15 transition-all duration-300">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">المصحف الشريف</h3>
-                    <p class="text-slate-400 leading-relaxed">قراءة مريحة مع الوضع الليلي، تفاسير، وترجمات، وخط واضح يحاكي مصحف المدينة.</p>
+                    <h3 class="font-serif text-lg font-bold text-white mb-3">المصحف الشريف</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">قراءة مريحة مع الوضع الليلي، تفاسير، وترجمات، وخط واضح يحاكي مصحف المدينة.</p>
                 </div>
 
-                <div data-aos="fade-up" data-aos-delay="200" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
-                        <i data-lucide="moon" class="w-7 h-7"></i>
+                <!-- Feature 3 -->
+                <div data-aos="fade-up" data-aos-delay="160" class="glass-card p-8 rounded-2xl group transition-all duration-500 relative">
+                    <div class="feature-number">03</div>
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center text-gold-400 mb-6 group-hover:bg-gold-500/15 transition-all duration-300">
+                        <i data-lucide="moon" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">أذكار وحصن المسلم</h3>
-                    <p class="text-slate-400 leading-relaxed">مكتبة شاملة من الأذكار والأدعية الصحيحة، مع مسبحة إلكترونية ذكية لتسهيل المتابعة.</p>
+                    <h3 class="font-serif text-lg font-bold text-white mb-3">أذكار وحصن المسلم</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">مكتبة شاملة من الأذكار والأدعية الصحيحة، مع مسبحة إلكترونية ذكية لتسهيل المتابعة.</p>
                 </div>
 
-                <div data-aos="fade-up" data-aos-delay="300" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
-                        <i data-lucide="compass" class="w-7 h-7"></i>
+                <!-- Feature 4 -->
+                <div data-aos="fade-up" data-aos-delay="240" class="glass-card p-8 rounded-2xl group transition-all duration-500 relative">
+                    <div class="feature-number">04</div>
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center text-gold-400 mb-6 group-hover:bg-gold-500/15 transition-all duration-300">
+                        <i data-lucide="compass" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">القبلة</h3>
-                    <p class="text-slate-400 leading-relaxed">حدد اتجاه القبلة بدقة أينما كنت، باستخدام مستشعرات الهاتف وبدون الحاجة للإنترنت.</p>
+                    <h3 class="font-serif text-lg font-bold text-white mb-3">القبلة</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">حدد اتجاه القبلة بدقة أينما كنت، باستخدام مستشعرات الهاتف وبدون الحاجة للإنترنت.</p>
                 </div>
 
-                <div data-aos="fade-up" data-aos-delay="400" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
-                        <i data-lucide="layout-grid" class="w-7 h-7"></i>
+                <!-- Feature 5 -->
+                <div data-aos="fade-up" data-aos-delay="320" class="glass-card p-8 rounded-2xl group transition-all duration-500 relative">
+                    <div class="feature-number">05</div>
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center text-gold-400 mb-6 group-hover:bg-gold-500/15 transition-all duration-300">
+                        <i data-lucide="layout-grid" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">ويدجت (Widget)</h3>
-                    <p class="text-slate-400 leading-relaxed">تابع أوقات الصلاة مباشرة من شاشة هاتفك الرئيسية، بتصاميم عصرية تناسب ذوقك.</p>
+                    <h3 class="font-serif text-lg font-bold text-white mb-3">ويدجت (Widget)</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">تابع أوقات الصلاة مباشرة من شاشة هاتفك الرئيسية، بتصاميم عصرية تناسب ذوقك.</p>
                 </div>
 
-                <div data-aos="fade-up" data-aos-delay="500" class="glass-card p-8 rounded-3xl group hover:bg-slate-800/50 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-midnight-700 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all border border-white/10">
-                        <i data-lucide="shield-check" class="w-7 h-7"></i>
+                <!-- Feature 6 -->
+                <div data-aos="fade-up" data-aos-delay="400" class="glass-card p-8 rounded-2xl group transition-all duration-500 relative">
+                    <div class="feature-number">06</div>
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center text-gold-400 mb-6 group-hover:bg-gold-500/15 transition-all duration-300">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3">خصوصية تامة</h3>
-                    <p class="text-slate-400 leading-relaxed">بياناتك ملكك وحدك. لا تتبع، لا إعلانات، ولا نطلب إلا الأذونات الضرورية للعمل.</p>
+                    <h3 class="font-serif text-lg font-bold text-white mb-3">خصوصية تامة</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">بياناتك ملكك وحدك. لا تتبع، لا إعلانات، ولا نطلب إلا الأذونات الضرورية للعمل.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="showcase" class="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-midnight-900 via-midnight-800 to-slate-900">
-        <div class="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-gold-500/5 via-gold-500/20 to-gold-500/5"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ===== SHOWCASE ===== -->
+    <section id="showcase" class="py-24 lg:py-32 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
                 
-                <div class="order-2 lg:order-1 space-y-8 text-right" data-aos="fade-right">
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white leading-tight">
-                        واجهة داكنة مريحة للعين، <br>
-                        <span class="text-gold-400">تساعدك على التدبر</span>
+                <!-- Text -->
+                <div class="order-2 lg:order-1 text-right" data-aos="fade-right">
+                    <p class="text-gold-500 text-xs tracking-[0.25em] uppercase font-medium mb-4">تجربة بصرية</p>
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-8">
+                        واجهة داكنة
+                        <br>
+                        <span class="text-gold-gradient">تساعدك على التدبر</span>
                     </h2>
-                    <p class="text-slate-400 text-lg leading-relaxed">
-                        ندرك أن أغلب العبادات كقيام الليل وقراءة الورد اليومي تكون في أوقات السكون. لذا صممنا الوضع الليلي (Dark Mode) بعناية فائقة، لتقليل إجهاد العين وزيادة التركيز والخشوع.
+                    <p class="text-slate-400 text-base lg:text-lg leading-relaxed mb-8">
+                        ندرك أن أغلب العبادات كقيام الليل وقراءة الورد اليومي تكون في أوقات السكون. لذا صممنا الوضع الليلي بعناية فائقة، لتقليل إجهاد العين وزيادة التركيز والخشوع.
                     </p>
+                    
+                    <!-- Mini feature list -->
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center text-gold-400 flex-shrink-0">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-slate-400 text-sm">تقليل إجهاد العين في الإضاءة المنخفضة</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center text-gold-400 flex-shrink-0">
+                                <i data-lucide="palette" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-slate-400 text-sm">ألوان مدروسة لتعزيز التركيز</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center text-gold-400 flex-shrink-0">
+                                <i data-lucide="type" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-slate-400 text-sm">خط واضح ومريح للقراءة المطولة</span>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Phones -->
                 <div class="order-1 lg:order-2 relative px-4" data-aos="fade-left">
-                    <div class="relative flex justify-center items-center h-[550px] cursor-pointer" onclick="swapPhones()" title="اضغط للتبديل">
+                    <div class="relative flex justify-center items-center h-[520px] cursor-pointer" onclick="swapPhones()" title="اضغط للتبديل">
                         
-                        <div id="phone-1" class="absolute w-full max-w-[250px] bg-slate-900 rounded-[2.5rem] border-4 border-slate-700 shadow-2xl overflow-hidden transition-all duration-700 ease-in-out phone-front">
-                             <img src="https://i.ibb.co/v44H7sxR/Screenshot-20260131-171201.jpg" alt="المصحف الشريف" class="w-full h-auto pointer-events-none">
+                        <div id="phone-1" class="absolute w-full max-w-[240px] phone-frame transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] phone-front">
+                            <div class="bg-midnight-900 rounded-[2.5rem] border-2 border-slate-700/40 overflow-hidden">
+                                <img src="https://i.ibb.co/v44H7sxR/Screenshot-20260131-171201.jpg" alt="المصحف الشريف" class="w-full h-auto pointer-events-none">
+                            </div>
                         </div>
 
-                        <div id="phone-2" class="absolute w-full max-w-[250px] bg-slate-800 rounded-[2.2rem] border-4 border-slate-600 shadow-xl overflow-hidden transition-all duration-700 ease-in-out phone-back">
-                             <img src="https://i.ibb.co/84SffZM0/Screenshot-20260131-165115.jpg" alt="لقطة أخرى للتطبيق" class="w-full h-auto pointer-events-none">
+                        <div id="phone-2" class="absolute w-full max-w-[240px] phone-frame transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] phone-back">
+                            <div class="bg-midnight-800 rounded-[2.3rem] border-2 border-slate-600/30 overflow-hidden">
+                                <img src="https://i.ibb.co/84SffZM0/Screenshot-20260131-165115.jpg" alt="لقطة أخرى للتطبيق" class="w-full h-auto pointer-events-none">
+                            </div>
                         </div>
 
                     </div>
-                    <div class="text-center mt-4 text-xs text-slate-500 animate-pulse hidden md:block">
-                        اضغط على الصور للتبديل
+                    <div class="text-center mt-2 text-[10px] text-slate-600 tracking-widest uppercase hidden md:block">
+                        اضغط للتبديل
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="donate" class="py-16 md:py-20 relative overflow-hidden bg-gradient-to-b from-slate-900 to-midnight-900">
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10" data-aos="zoom-in">
-            <div class="glass-card rounded-3xl p-8 md:p-10 border border-gold-500/20 shadow-[0_0_50px_rgba(234,179,8,0.1)]">
-                <div class="w-16 h-16 bg-gold-500/10 rounded-full flex items-center justify-center mx-auto mb-6 text-gold-400">
-                    <i data-lucide="heart" class="w-8 h-8 fill-current"></i>
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ===== DONATE ===== -->
+    <section id="donate" class="py-24 lg:py-32 relative overflow-hidden">
+        <!-- Background glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-gold-500/[0.04] blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10" data-aos="fade-up">
+            <div class="glass-card rounded-3xl p-10 md:p-14 border border-gold-500/10">
+                
+                <div class="w-14 h-14 bg-gold-500/10 rounded-2xl flex items-center justify-center mx-auto mb-8 text-gold-400">
+                    <i data-lucide="heart" class="w-7 h-7"></i>
                 </div>
                 
-                <h2 class="font-serif text-2xl md:text-3xl font-bold text-white mb-4">ساهم في الأجر واستمرار الخير</h2>
+                <h2 class="font-serif text-2xl md:text-4xl font-bold text-white mb-5 leading-tight">ساهم في الأجر<br>واستمرار الخير</h2>
                 
-                <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                <p class="text-slate-400 text-base mb-10 leading-relaxed max-w-md mx-auto">
                     تطبيق <span class="text-gold-400 font-bold">أنيروا</span> مجاني بالكامل لوجه الله تعالى، ولا يحتوي على أي إعلانات تجارية لضمان خشوعك.
-                    <br class="hidden md:inline">
                     إذا كنت ترغب في دعم جهود التطوير وتكاليف الخوادم، يمكنك المساهمة بما تجود به نفسك.
                 </p>
 
-                <a href="https://ko-fi.com/aniro_" target="_blank" class="inline-flex items-center gap-3 bg-[#FF5E5B] text-white hover:bg-[#ff4642] px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto justify-center">
-                    <i data-lucide="coffee" class="w-6 h-6"></i>
+                <a href="https://ko-fi.com/aniro_" target="_blank" class="kofi-btn inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-base w-full sm:w-auto justify-center">
+                    <i data-lucide="coffee" class="w-5 h-5"></i>
                     <span>ادعمنا على Ko-fi</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-midnight-900 border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-white/[0.04] relative">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 py-14">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 
                 <div class="text-center md:text-right">
                     <div class="flex items-center gap-2 justify-center md:justify-start mb-4">
-                        <img src="https://i.ibb.co/3m1cD2NJ/Adobe-Express-file.png" alt="شعار أنيروا" class="h-12 w-auto object-contain rounded-lg opacity-90">
+                        <img src="https://i.ibb.co/3m1cD2NJ/Adobe-Express-file.png" alt="شعار أنيروا" class="h-10 w-auto object-contain rounded-lg opacity-80">
                     </div>
-                    <p class="text-slate-500 text-sm max-w-xs">
+                    <p class="text-slate-600 text-sm max-w-xs">
                         تطبيق إسلامي شامل يهدف لربط المسلم بعباداته بيسر وسهولة.
                     </p>
                 </div>
 
-                <div class="flex gap-8 text-sm font-medium text-slate-400">
+                <div class="flex gap-8 text-sm font-medium text-slate-500">
                     <button onclick="document.getElementById('privacy-modal').classList.remove('hidden')" class="hover:text-gold-400 transition-colors">سياسة الخصوصية</button>
                 </div>
             </div>
             
-            <div class="mt-12 pt-8 border-t border-white/5 text-center text-xs text-slate-600">
-                جميع الحقوق محفوظة لتطبيق أنيروا © 2024
+            <div class="mt-12 pt-8 border-t border-white/[0.04] text-center text-xs text-slate-700 tracking-wide">
+                جميع الحقوق محفوظة لتطبيق أنيروا &copy; 2025
             </div>
         </div>
     </footer>
 
+    <!-- ===== PRIVACY MODAL ===== -->
     <div id="privacy-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="document.getElementById('privacy-modal').classList.add('hidden')"></div>
+        <div class="fixed inset-0 bg-midnight-950/90 backdrop-blur-md transition-opacity" onclick="document.getElementById('privacy-modal').classList.add('hidden')"></div>
 
         <div class="fixed inset-0 z-10 overflow-y-auto">
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-                <div class="relative transform overflow-hidden rounded-2xl bg-slate-900 text-right shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl border border-white/10">
-                    <div class="bg-slate-900 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mt-3 text-center sm:mt-0 sm:text-right w-full">
-                                <h3 class="text-2xl font-serif font-semibold leading-6 text-white mb-6" id="modal-title">سياسة الخصوصية</h3>
-                                <div class="mt-2 text-slate-300 space-y-4 max-h-[60vh] overflow-y-auto pl-2">
-                                    <p class="font-bold text-gold-400">1. جمع البيانات</p>
-                                    <p class="text-sm">نحن في تطبيق "أنيروا" نولي خصوصيتك أولوية قصوى. لا نقوم بجمع أي بيانات شخصية (كالاسم، البريد الإلكتروني) إلا ما يتم تقديمه طواعية للتواصل.</p>
-                                    
-                                    <p class="font-bold text-gold-400">2. الموقع الجغرافي</p>
-                                    <p class="text-sm">يستخدم التطبيق موقعك الجغرافي فقط لحساب مواقيت الصلاة وتحديد اتجاه القبلة بدقة. لا يتم تخزين موقعك على خوادمنا ولا مشاركته مع أي طرف ثالث.</p>
-                                    
-                                    <p class="font-bold text-gold-400">3. الأذونات</p>
-                                    <p class="text-sm">قد يطلب التطبيق إذن الوصول للإشعارات للتنبيه بأوقات الصلاة. هذا الإذن يستخدم محلياً على جهازك فقط.</p>
-                                    
-                                    <p class="font-bold text-gold-400">4. الإعلانات</p>
-                                    <p class="text-sm">التطبيق مجاني بالكامل ولا يحتوي على أي إعلانات تجارية، لضمان تجربة خشوع تامة.</p>
+                <div class="relative transform overflow-hidden rounded-2xl glass-card text-right shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-2xl border border-gold-500/10 modal-enter">
+                    <div class="px-6 pb-6 pt-8 sm:p-8">
+                        <div class="w-full">
+                            <h3 class="text-2xl font-serif font-bold text-white mb-8" id="modal-title">سياسة الخصوصية</h3>
+                            <div class="text-slate-400 space-y-5 max-h-[60vh] overflow-y-auto pl-2">
+                                <div>
+                                    <p class="font-bold text-gold-400 text-sm mb-2">1. جمع البيانات</p>
+                                    <p class="text-sm leading-relaxed">نحن في تطبيق "أنيروا" نولي خصوصيتك أولوية قصوى. لا نقوم بجمع أي بيانات شخصية (كالاسم، البريد الإلكتروني) إلا ما يتم تقديمه طواعية للتواصل.</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gold-400 text-sm mb-2">2. الموقع الجغرافي</p>
+                                    <p class="text-sm leading-relaxed">يستخدم التطبيق موقعك الجغرافي فقط لحساب مواقيت الصلاة وتحديد اتجاه القبلة بدقة. لا يتم تخزين موقعك على خوادمنا ولا مشاركته مع أي طرف ثالث.</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gold-400 text-sm mb-2">3. الأذونات</p>
+                                    <p class="text-sm leading-relaxed">قد يطلب التطبيق إذن الوصول للإشعارات للتنبيه بأوقات الصلاة. هذا الإذن يستخدم محلياً على جهازك فقط.</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gold-400 text-sm mb-2">4. الإعلانات</p>
+                                    <p class="text-sm leading-relaxed">التطبيق مجاني بالكامل ولا يحتوي على أي إعلانات تجارية، لضمان تجربة خشوع تامة.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-slate-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                        <button type="button" class="inline-flex w-full justify-center rounded-xl bg-gold-500 px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-gold-400 sm:ml-3 sm:w-auto" onclick="document.getElementById('privacy-modal').classList.add('hidden')">حسناً، فهمت</button>
+                    <div class="px-6 py-4 sm:px-8 border-t border-white/[0.04] flex justify-end">
+                        <button type="button" class="bg-gold-500 text-midnight-950 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gold-400 transition-colors" onclick="document.getElementById('privacy-modal').classList.add('hidden')">حسناً، فهمت</button>
                     </div>
                 </div>
             </div>
@@ -404,17 +662,18 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // تهيئة مكتبة AOS
+        // Init AOS
         AOS.init({
-            duration: 800,
+            duration: 900,
             once: true,
-            offset: 100
+            offset: 80,
+            easing: 'ease-out-cubic'
         });
 
-        // تهيئة الأيقونات
+        // Init Lucide icons
         lucide.createIcons();
 
-        // Mobile Menu Logic
+        // Mobile Menu
         const menuBtn = document.getElementById('mobile-menu-btn');
         const closeMenuBtn = document.getElementById('close-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -422,47 +681,44 @@
 
         function toggleMenu() {
             if (mobileMenu.classList.contains('translate-x-full')) {
-                // Open Menu
                 mobileMenu.classList.remove('translate-x-full');
                 document.body.style.overflow = 'hidden';
             } else {
-                // Close Menu
                 mobileMenu.classList.add('translate-x-full');
                 document.body.style.overflow = 'auto';
             }
         }
 
-        if (menuBtn) {
-            menuBtn.addEventListener('click', toggleMenu);
-        }
-        
-        if (closeMenuBtn) {
-            closeMenuBtn.addEventListener('click', toggleMenu);
-        }
+        if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
+        // Nav shrink on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                nav.classList.add('py-0');
+                nav.querySelector('.h-20')?.classList.replace('h-20', 'h-16');
+            } else {
+                nav.classList.remove('py-0');
+                nav.querySelector('.h-16')?.classList.replace('h-16', 'h-20');
+            }
         });
 
-        // Phone Swap Logic
+        // Phone Swap
         let isSwapped = false;
         function swapPhones() {
             const phone1 = document.getElementById('phone-1');
             const phone2 = document.getElementById('phone-2');
             
             if (!isSwapped) {
-                // Move Phone 1 to Back
                 phone1.classList.remove('phone-front');
                 phone1.classList.add('phone-back');
-                
-                // Move Phone 2 to Front
                 phone2.classList.remove('phone-back');
                 phone2.classList.add('phone-front');
             } else {
-                // Return to default
                 phone1.classList.remove('phone-back');
                 phone1.classList.add('phone-front');
-                
                 phone2.classList.remove('phone-front');
                 phone2.classList.add('phone-back');
             }

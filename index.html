@@ -414,30 +414,39 @@
         // تهيئة الأيقونات
         lucide.createIcons();
 
-        // Direct APK Download - bypass browser memory issue
+        // Direct APK Download - fetch as blob and download
         document.querySelectorAll('a[href*="github.com"][href*=".apk"]').forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', async function(e) {
                 e.preventDefault();
                 const apkUrl = this.href;
+                const fileName = 'Aniro-v4.0.apk';
                 
                 // Show downloading indicator
                 const originalText = this.innerHTML;
-                this.innerHTML = '<svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>جاري التحميل...';
+                this.innerHTML = '<svg class="animate-spin w-5 h-5 mr-2 inline" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>جاري التحميل...';
                 
-                // Create hidden iframe to trigger download
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = apkUrl;
-                document.body.appendChild(iframe);
-                
-                // Remove iframe after download starts
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                    link.innerHTML = originalText;
-                }, 5000);
-                
-                // Also open in new tab as backup
-                window.open(apkUrl, '_blank');
+                try {
+                    // Fetch the file as blob
+                    const response = await fetch(apkUrl);
+                    const blob = await response.blob();
+                    
+                    // Create download link
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = downloadUrl;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(downloadUrl);
+                    
+                    this.innerHTML = originalText;
+                } catch (error) {
+                    console.error('Download failed:', error);
+                    this.innerHTML = originalText;
+                    // Fallback: open in new tab
+                    window.open(apkUrl, '_blank');
+                }
             });
         });
 

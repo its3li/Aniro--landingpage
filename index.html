@@ -157,7 +157,7 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="https://github.com/its3li/Aniro-V3/releases/download/v4.0/Aniro-v4.0.apk" class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] flex items-center gap-2 border border-gold-300/20 text-xs md:text-sm">
+                    <a href="/Aniro-v4.0.apk" download class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] flex items-center gap-2 border border-gold-300/20 text-xs md:text-sm">
                         <span>تحميل</span>
                         <span class="hidden md:inline">APK</span>
                         <img src="https://cdn.freebiesupply.com/logos/large/2x/android-logo-black-and-white.png" alt="Android" class="w-5 h-5 object-contain opacity-90">
@@ -208,7 +208,7 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-5 justify-center w-full max-w-md mx-auto mb-16 px-4 animate-fade-in-up" style="animation-delay: 0.6s;">
-                <a href="https://github.com/its3li/Aniro-V3/releases/download/v4.0/Aniro-v4.0.apk" class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 hover:brightness-110 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] flex items-center justify-center gap-3 w-full sm:w-auto">
+                <a href="/Aniro-v4.0.apk" download class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 hover:brightness-110 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] flex items-center justify-center gap-3 w-full sm:w-auto">
                     <img src="https://cdn.freebiesupply.com/logos/large/2x/android-logo-black-and-white.png" alt="Android" class="w-6 h-6 object-contain opacity-90">
                     تحميل التطبيق مباشرة (APK)
                 </a>
@@ -413,42 +413,6 @@
 
         // تهيئة الأيقونات
         lucide.createIcons();
-
-        // Direct APK Download - fetch as blob and download
-        document.querySelectorAll('a[href*="github.com"][href*=".apk"]').forEach(link => {
-            link.addEventListener('click', async function(e) {
-                e.preventDefault();
-                const apkUrl = this.href;
-                const fileName = 'Aniro-v4.0.apk';
-                
-                // Show downloading indicator
-                const originalText = this.innerHTML;
-                this.innerHTML = '<svg class="animate-spin w-5 h-5 mr-2 inline" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>جاري التحميل...';
-                
-                try {
-                    // Fetch the file as blob
-                    const response = await fetch(apkUrl);
-                    const blob = await response.blob();
-                    
-                    // Create download link
-                    const downloadUrl = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = downloadUrl;
-                    a.download = fileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(downloadUrl);
-                    
-                    this.innerHTML = originalText;
-                } catch (error) {
-                    console.error('Download failed:', error);
-                    this.innerHTML = originalText;
-                    // Fallback: open in new tab
-                    window.open(apkUrl, '_blank');
-                }
-            });
-        });
 
         // Mobile Menu Logic
         const menuBtn = document.getElementById('mobile-menu-btn');

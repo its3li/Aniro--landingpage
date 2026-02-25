@@ -157,9 +157,9 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="https://ghproxy.com/https://github.com/its3li/Aniro-V3/releases/latest/download/Aniro-v4.0.apk" download class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] flex items-center gap-2 border border-gold-300/20 text-xs md:text-sm">
+                    <a id="download-nav" href="#" class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 px-4 md:px-6 py-2 md:py-2.5 rounded-full font-bold transition-all transform hover:scale-105 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] flex items-center gap-2 border border-gold-300/20 text-xs md:text-sm">
                         <span>تحميل</span>
-                        <span class="hidden md:inline">APK</span>
+                        <span class="hidden md:inline" id="nav-version">...</span>
                         <img src="https://cdn.freebiesupply.com/logos/large/2x/android-logo-black-and-white.png" alt="Android" class="w-5 h-5 object-contain opacity-90">
                     </a>
 
@@ -208,9 +208,9 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-5 justify-center w-full max-w-md mx-auto mb-16 px-4 animate-fade-in-up" style="animation-delay: 0.6s;">
-                <a href="https://ghproxy.com/https://github.com/its3li/Aniro-V3/releases/latest/download/Aniro-v4.0.apk" download class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 hover:brightness-110 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] flex items-center justify-center gap-3 w-full sm:w-auto">
+                <a id="download-btn" href="#" class="bg-gradient-to-r from-gold-400 to-gold-600 text-midnight-900 hover:brightness-110 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] flex items-center justify-center gap-3 w-full sm:w-auto">
                     <img src="https://cdn.freebiesupply.com/logos/large/2x/android-logo-black-and-white.png" alt="Android" class="w-6 h-6 object-contain opacity-90">
-                    تحميل التطبيق مباشرة (APK)
+                    <span id="download-text">تحميل التطبيق...</span>
                 </a>
             </div>
 
@@ -413,6 +413,52 @@
 
         // تهيئة الأيقونات
         lucide.createIcons();
+
+        // Auto-fetch latest APK release from GitHub
+        (async function() {
+            const downloadBtn = document.getElementById('download-btn');
+            const downloadNav = document.getElementById('download-nav');
+            const downloadText = document.getElementById('download-text');
+            const navVersion = document.getElementById('nav-version');
+            
+            try {
+                // Fetch latest release from GitHub API
+                const response = await fetch('https://api.github.com/repos/its3li/Aniro-V3/releases/latest');
+                const release = await response.json();
+                
+                // Find APK asset
+                const apkAsset = release.assets.find(a => a.name.endsWith('.apk'));
+                
+                if (apkAsset) {
+                    const downloadUrl = 'https://ghproxy.com/' + apkAsset.browser_download_url;
+                    const version = release.tag_name || 'Latest';
+                    
+                    // Update main download button
+                    if (downloadBtn) {
+                        downloadBtn.href = downloadUrl;
+                    }
+                    if (downloadText) {
+                        downloadText.textContent = `تحميل ${version}`;
+                    }
+                    
+                    // Update navbar download button
+                    if (downloadNav) {
+                        downloadNav.href = downloadUrl;
+                    }
+                    if (navVersion) {
+                        navVersion.textContent = version;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to fetch latest release:', error);
+                // Fallback to default URL
+                const fallbackUrl = 'https://ghproxy.com/https://github.com/its3li/Aniro-V3/releases/download/v4.0/Aniro-v4.0.apk';
+                if (downloadBtn) downloadBtn.href = fallbackUrl;
+                if (downloadNav) downloadNav.href = fallbackUrl;
+                if (downloadText) downloadText.textContent = 'تحميل التطبيق';
+                if (navVersion) navVersion.textContent = 'APK';
+            }
+        })();
 
         // Mobile Menu Logic
         const menuBtn = document.getElementById('mobile-menu-btn');

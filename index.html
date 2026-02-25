@@ -430,33 +430,33 @@
                 const apkAsset = release.assets.find(a => a.name.endsWith('.apk'));
                 
                 if (apkAsset) {
-                    const downloadUrl = 'https://ghproxy.com/' + apkAsset.browser_download_url;
-                    const version = release.tag_name || 'Latest';
+                    const downloadUrl = apkAsset.browser_download_url;
                     
-                    // Update main download button
+                    // Update download buttons
                     if (downloadBtn) {
                         downloadBtn.href = downloadUrl;
                     }
-                    if (downloadText) {
-                        downloadText.textContent = `تحميل ${version}`;
-                    }
-                    
-                    // Update navbar download button
                     if (downloadNav) {
                         downloadNav.href = downloadUrl;
                     }
-                    if (navVersion) {
-                        navVersion.textContent = version;
-                    }
                 }
+                
+                // Always show "تحميل التطبيق" only
+                if (downloadText) {
+                    downloadText.textContent = 'تحميل التطبيق';
+                }
+                if (navVersion) {
+                    navVersion.textContent = '';
+                }
+                
             } catch (error) {
                 console.error('Failed to fetch latest release:', error);
-                // Fallback to default URL
-                const fallbackUrl = 'https://ghproxy.com/https://github.com/its3li/Aniro-V3/releases/download/v4.0/Aniro-v4.0.apk';
+                // Fallback
+                const fallbackUrl = 'https://github.com/its3li/Aniro-V3/releases/download/v4.0/Aniro-v4.0.apk';
                 if (downloadBtn) downloadBtn.href = fallbackUrl;
                 if (downloadNav) downloadNav.href = fallbackUrl;
                 if (downloadText) downloadText.textContent = 'تحميل التطبيق';
-                if (navVersion) navVersion.textContent = 'APK';
+                if (navVersion) navVersion.textContent = '';
             }
         })();
 
